@@ -6,22 +6,21 @@
     <div class="form-group">
       <label>Username</label>
       <input 
-      [class.is-invalid]="userName?.invalid 
-                        && userName?.touched" 
+     
       
       formControlName="userName" type="text" class="form-control">
       
       <!--<small [class.d-none]="userName.valid 
       || userName.untouched" class="text-danger">UserName is Required!</small> 
       -->
-
-      <div *ngIf="userName?.invalid 
+      <!--<div *ngIf="userName?.invalid 
               && userName?.touched">
 
         <small *ngIf="userName!.errors?.required" class="text-danger">Username is Required!</small> <br/>
         <small *ngIf="!userName!.errors?.minLength" class="text-danger">Username Must Be at Least 2 Characters Long!</small>
         <small *ngIf="userName!.errors?.forbiddenName" class="text-danger">{{userName?.errors?.forbiddenName.value}} Username Not Allowed!</small>
-      </div>
+      </div>--->
+      
 
     </div>
 
