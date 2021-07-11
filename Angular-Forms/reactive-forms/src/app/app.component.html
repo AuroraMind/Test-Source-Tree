@@ -14,6 +14,7 @@
       <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
         <small class="text-danger" *ngIf="registrationForm.get('userName')?.errors?.required">Username is Required!</small>
         <small class="text-danger" *ngIf="!registrationForm.get('userName')?.errors?.minLength">Username Must Be at Least 2 Characters Long!</small>
+        <small class="text-danger" *ngIf="registrationForm.get('userName')?.errors?.forbiddenName"> Username is Forbidden!</small>
       </div>
       
 
