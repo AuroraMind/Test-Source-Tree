@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { forbiddenNameValidator } from './shared/user-name.validator';
 
 @Component({
@@ -9,7 +9,9 @@ import { forbiddenNameValidator } from './shared/user-name.validator';
 })
 export class AppComponent {
 
-  registrationForm = new FormGroup( 
+  constructor(private fb: FormBuilder) {}
+
+  /*registrationForm = new FormGroup( 
     {
     userName: new FormControl( '', [Validators.required, Validators.minLength(2), forbiddenNameValidator]),
     password: new FormControl(''),
@@ -22,7 +24,7 @@ export class AppComponent {
         postalCode: new FormControl('')
       }
     )
-  });
+  });*/ //FormGroup & FormControl Approach
 
   loadApiData() {
     //this.registrationForm.setValue(
@@ -41,7 +43,7 @@ export class AppComponent {
     )*/
   }
 
-  get userName() {
+ /* get userName() {
     return this.registrationForm.get('userName');
-  }
+  }*/
 }
