@@ -6,7 +6,8 @@
     <div class="form-group">
       <label>Username</label>
       <input 
-     
+      [class.is-invalid] = "registrationForm.get('userName')?.invalid &&
+                            registrationForm.get('userName')?.touched"
       
       formControlName="userName" type="text" class="form-control">
       
