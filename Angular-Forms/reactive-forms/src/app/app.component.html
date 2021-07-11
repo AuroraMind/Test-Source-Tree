@@ -16,8 +16,23 @@
         <small class="text-danger" *ngIf="!registrationForm.get('userName')?.errors?.minLength">Username Must Be at Least 2 Characters Long!</small>
         <small class="text-danger" *ngIf="registrationForm.get('userName')?.errors?.forbiddenName"> Username is Forbidden!</small>
       </div>
-      
+    </div>
 
+    <div class="form-group">
+      <label>Email</label>
+      <input [class.is-invalid] = "registrationForm.get('email')?.invalid &&
+      registrationForm.get('email')?.touched"
+      
+      type="text" formControlName="email" class="form-control">
+
+      <small class="text-danger" [class.d-none]="registrationForm.get('email')?.valid &&
+      registrationForm.get('email')?.untouched"> Must Use Email in Order to Subscribe!</small>
+    </div>
+
+    <div class="form-check mb-3">
+      <input type="checkbox" formControlName="subscribe" class="form-check-input">
+      <label for="" class="form-check-label"></label>
+      Send Me Promotional Offers!
     </div>
 
     <div class="form-group">
