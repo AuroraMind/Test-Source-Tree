@@ -54,7 +54,4 @@ export class AppComponent {
     )*/
   }
 
- /* get userName() {
-    return this.registrationForm.get('userName');
-  }*/
 }
