@@ -20,13 +20,17 @@
 
     <div class="form-group">
       <label>Email</label>
+      <button (click)="addAlternateEmail()" type="button" class="btn btn-secondary btn-sm m-2">Add Alternative E-mail</button>
       <input [class.is-invalid] = "registrationForm.get('email')?.invalid &&
       registrationForm.get('email')?.touched"
       
       type="text" formControlName="email" class="form-control">
 
-      <small class="text-danger" [class.d-none]="registrationForm.get('email')?.valid &&
+      <small class="text-danger" [class.d-none]="registrationForm.get('email')?.valid ||
       registrationForm.get('email')?.untouched"> Must Use Email in Order to Subscribe!</small>
+      <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i=index">
+        <input type="text" class="form-control my-1" [formControlName]="i">
+      </div>
     </div>
 
     <div class="form-check mb-3">
@@ -65,7 +69,7 @@
 
     </div>
 
-    <button class="btn btn-primary" type="submit">Register</button>
+    <button (click)="onSubmit()" [disabled]="!registrationForm.valid" class="btn btn-primary" type="submit">Register</button>
     <button (click)="loadApiData()" class="btn btn-secondary mt-2" type="button">Load API Data</button>
 
   </form>

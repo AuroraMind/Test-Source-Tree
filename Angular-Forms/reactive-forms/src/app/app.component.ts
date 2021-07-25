@@ -1,5 +1,6 @@
+import { RegistrationService } from './registration.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms'
 import { PasswordValidator } from './shared/password.validator';
 import { forbiddenNameValidator } from './shared/user-name.validator';
 
@@ -12,7 +13,26 @@ export class AppComponent implements OnInit {
 
   registrationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private _registrationService:RegistrationService
+    ) {}
+
+  get userName() {
+    return this.registrationForm.get('userName');
+  }
+
+  get email() {
+    return this.registrationForm.get('email');
+  }
+
+  get alternateEmails() {
+    return this.registrationForm.get('alternateEmails') as FormArray;
+  }
+
+  addAlternateEmail() {
+    this.alternateEmails.push(this.fb.control(''));
+  }
 
   ngOnInit(){
 
@@ -20,13 +40,14 @@ export class AppComponent implements OnInit {
       userName: ['', [Validators.required, Validators.minLength(2), forbiddenNameValidator(/password/)]],
       email: [''],
       subscribe: [false],
-      password: [''],
+      password: ['',[Validators.required]],
       confirmPassword: [''],
       address: this.fb.group({
         city: [''],
         state: [''],
         postalCode: [''],
-      })
+      }),
+      alternateEmails: this.fb.array([])
       
      },
         {validator: PasswordValidator} 
@@ -44,6 +65,14 @@ export class AppComponent implements OnInit {
           email?.updateValueAndValidity();
         }
         );
+  }
+
+  onSubmit() {
+    this._registrationService.register(this.registrationForm.value)
+      .subscribe(
+        response =>console.log("Success!! ", response),
+        error => console.log("Error!! ", error)
+      )
   }
 
   
